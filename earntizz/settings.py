@@ -54,7 +54,7 @@ ROOT_URLCONF = 'earntizz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'earntizz/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

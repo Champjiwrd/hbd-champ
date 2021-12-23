@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>HBD</title>
+</head>
+<body>
+    <canvas></canvas>
+    <div id="app">
+    <v-app>
+      <v-main>
+        <v-container>
+            <canvas></canvas>
+            <v-card height="650" class="transparent d-flex align-center justify-center flex-column elevation-0" >
+                <div><h1 class="red--text text-h2">Happy Birthday</h1></div>
+                <div>to</div>
+                <div class="text-h3 red--text">EARN</div>
+                <v-divider></v-divider>
+                <div>สุขสันต์วันเกิด น้าาาาา</div>
+                <div>มีความสุขมากๆน้า คิดอะไรขอให้สมความปรารถนา ตั้งใจทำงานเก็บเงิน สุขภาพแข็งแรงน้าาา ขอให้คนรอบข้างรักมากๆ
+                </div>
+            </v-card>
+            <div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div><div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div><div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<v-card height="650" class="transparent d-flex align-center justify-center flex-column elevation-0" >
+    <div><h1 class="red--text text-h2">Merry Christmas</h1></div>
+    <div>สุขสันต์วันคริสต์มาสด้วยเลยละกัน</div>
+</v-card>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+  <script>
+
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+    
+    let width, height, lastNow
+    let snowflakes
+    const maxSnowflakes = 100
+    
+    function init() {
+      snowflakes = []
+      resize()
+      render(lastNow = performance.now())
+    }
+    
+    function render(now) {
+      requestAnimationFrame(render)
+      
+      const elapsed = now - lastNow
+      lastNow = now
+      
+      ctx.clearRect(0, 0, width, height)
+      if (snowflakes.length < maxSnowflakes)
+        snowflakes.push(new Snowflake())
+      
+      ctx.fillStyle = ctx.strokeStyle = '#fff'
+    
+      snowflakes.forEach(snowflake => snowflake.update(elapsed, now))
+    }
+    
+    function pause() {
+      cancelAnimationFrame(render)
+    }
+    function resume() {
+      lastNow = performance.now()
+      requestAnimationFrame(render)
+    }
+    
+    
+    class Snowflake {
+      constructor() {
+        this.spawn()
+      }
+      
+      spawn(anyY = false) {
+        this.x = rand(0, width)
+        this.y = anyY === true
+          ? rand(-50, height + 50)
+          : rand(-50, -10)
+        this.xVel = rand(-.05, .05)
+        this.yVel = rand(.02, .1)
+        this.angle = rand(0, Math.PI * 2)
+        this.angleVel = rand(-.001, .001)
+        this.size = rand(7, 12)
+        this.sizeOsc = rand(.01, .5)
+      }
+      
+      update(elapsed, now) {
+        const xForce = rand(-.001, .001);
+    
+        if (Math.abs(this.xVel + xForce) < .075) {
+          this.xVel += xForce
+        }
+        
+        this.x += this.xVel * elapsed
+        this.y += this.yVel * elapsed
+        this.angle += this.xVel * 0.05 * elapsed //this.angleVel * elapsed
+        
+        if (
+          this.y - this.size > height ||
+          this.x + this.size < 0 ||
+          this.x - this.size > width
+        ) {
+          this.spawn()
+        }
+        
+        this.render()
+      }
+      
+      render() {
+        ctx.save()
+        const { x, y, angle, size } = this
+        ctx.beginPath()
+        ctx.arc(x, y, size * 0.2, 0, Math.PI * 2, false)
+        ctx.fill()
+        ctx.restore()
+      }
+    }
+    
+    // Utils
+    const rand = (min, max) => min + Math.random() * (max - min)
+    
+    function resize() {
+      width = canvas.width = window.innerWidth
+      height = canvas.height = window.innerHeight
+    }
+    
+    window.addEventListener('resize', resize)
+    window.addEventListener('blur', pause)
+    window.addEventListener('focus', resume)
+    init()
+    
+      </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+    })
+  </script>
+
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;400&display=swap');
+      *{
+        font-family: 'Kanit', sans-serif;
+        background:hsl(70, 31%, 85%);
+          color: black;
+          text-align: center;
+      }
+
+      canvas {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.balloon {
+  display:inline-block;
+   width:120px;
+  height:145px;
+  background:hsl(215,50%,65%);
+  border-radius:80%;
+  position:relative;
+  box-shadow:inset -10px -10px 0 rgba(0,0,0,0.07);
+  margin:20px 30px;
+  transition:transform 0.5s ease;
+  z-index:10;
+  animation:balloons 4s ease-in-out infinite;
+  transform-origin:bottom center;
+}
+
+@keyframes balloons {
+  0%,100%{ transform:translateY(0) rotate(-4deg); }
+  50%{ transform:translateY(-25px) rotate(4deg); }
+}
+
+
+.balloon:before {
+  content:"▲";
+  font-size:20px;
+  color:hsl(215,30%,50%);
+  display:block;
+  text-align:center;
+  width:100%;
+  position:absolute;
+  bottom:-12px;
+  z-index:-100;
+}
+
+.balloon:after {
+ display:inline-block; top:153px;
+  position:absolute;
+  height:250px;
+  width:1px;
+  margin:0 auto;
+  content:"";
+  background:rgba(0,0,0,0.2); 
+}
+
+.balloon:nth-child(2n){ background:hsl(245,40%,65%); animation-duration:3.5s; }
+.balloon:nth-child(2n):before { color:hsl(245,40%,65%);  }
+
+.balloon:nth-child(3n){ background:hsl(139,50%,60%); animation-duration:3s; }
+.balloon:nth-child(3n):before { color:hsl(139,30%,50%);  }
+
+.balloon:nth-child(4n){ background:hsl(59,50%,58%); animation-duration:4.5s; }
+.balloon:nth-child(4n):before { color:hsl(59,30%,52%);  }
+
+.balloon:nth-child(5n){ background:hsl(23,55%,57%); animation-duration:5s; }
+.balloon:nth-child(5n):before { color:hsl(23,44%,46%);  }
+
+
+  </style>
+</body>
+</html>
