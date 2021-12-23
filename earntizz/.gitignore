@@ -307,3 +307,8 @@ modules.xml
 # Cython debug symbols
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm+all,django
+
+.idea/
+__pycache__/
+db.sqlite3
+venv/
