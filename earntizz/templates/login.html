@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Voccoli</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="icon"
+        href="https://www.pngkey.com/png/full/67-674286_png-free-stock-vegetable-free-broccoli-clip-art.png"
+        type="image/x-icon">
+    <style>
+        .slider {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-flow: row nowrap;
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            -webkit-box-align: end;
+            -webkit-align-items: flex-end;
+            -ms-flex-align: end;
+            align-items: flex-end;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .slider__nav {
+            border-radius: 50%;
+            z-index: 10;
+            outline: 6px solid #ccc;
+            outline-offset: -6px;
+            box-shadow: 0 0 0 0 #333, 0 0 0 0 rgba(51, 51, 51, 0);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .slider__nav:checked {
+            -webkit-animation: check linear forwards;
+            animation: check linear forwards;
+        }
+
+        .slider__nav:checked:nth-of-type(1)~.slider__inner {
+            -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+        }
+
+        .slider__nav:checked:nth-of-type(2)~.slider__inner {
+            -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+        }
+
+
+        .slider__inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            -webkit-transition: all 1s ease-out;
+            transition: all 0.5s ease-out;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-flow: row nowrap;
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+        }
+
+        .slider__contents {
+            height: 100%;
+            padding: 2rem;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            -webkit-flex-flow: column nowrap;
+            -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .container-fluid {
+            height: 100vh;
+            background-color: hsl(70, 31%, 85%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-fluid>div {
+            width: 85%;
+            min-width: 375px;
+            max-width: 500px;
+        }
+
+        .card {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .social-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .btn a,
+        .btn a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn-facebook {
+            background-color: #3B5998;
+            color: white;
+            opacity: 0.85;
+        }
+
+        .btn-facebook:hover {
+            opacity: 1;
+            color: white;
+        }
+
+        /* The message box is shown when the user clicks on the password field */
+        #message,
+        #messageRC {
+            display: none;
+            color: #000;
+            position: relative;
+            margin-top: 15px;
+        }
+
+
+
+        #message p,
+        #messeageRC p {
+            padding: 10px 35px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="slider">
+            <input type="radio" id="slider1" name="slider" title="slide1" class="slider__nav" checked="checked" />
+            <input type="radio" id="slider2" name="slider" title="slide2" class="slider__nav" />
+            <div class="slider__inner">
+                <div class="slider__contents">
+
+                    <div class="card shadow p-5">
+                        <div class="d-grid gap-2">
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="username" name='username'
+                                        placeholder="Username">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" id="password" name='password'
+                                        placeholder="Password">
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-success" type="button">Login</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+
+                    </div>
+                </div>
+                <div class="slider__contents">
+
+                </div>
+                <div class="slider__contents">
+                </div>
+                <div class="slider__contents">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
