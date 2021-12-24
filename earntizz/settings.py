@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-ej@y67%e*@pbg@z3j8(2h#okpuc2nd=g!2ybi7@5*)%@)c01+%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://hbd-earntizz.herokuapp.com/']
-CSRF_TRUSTED_ORIGINS = ['https://hbd-earntizz.herokuapp.com']
+ALLOWED_HOSTS = ['https://hbd-champ.herokuapp.com/']
+CSRF_TRUSTED_ORIGINS = ['https://hbd-champ.herokuapp.com']
 
 # Application definition
 
