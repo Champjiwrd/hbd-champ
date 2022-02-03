@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-ej@y67%e*@pbg@z3j8(2h#okpuc2nd=g!2ybi7@5*)%@)c01+%
 DEBUG = False
 
 ALLOWED_HOSTS = ['https://hny-champ.herokuapp.com/']
+# ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://hny-champ.herokuapp.com']
 
 # Application definition
